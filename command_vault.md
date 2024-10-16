@@ -1,17 +1,35 @@
+# Criando o certificado
+step 1: Criando as pastas
+```bash
 mkdir -p /opt/vault/{tls,data}
+```
+step 2: em `opt/vault/tls` vamos criar o certificado com a função open ssl, com duração de 10 anos, no campo `subjectAltName` é necesario informar o IP da máquina e o nome da maquina configurado no DNS.
+```bash
 cd /opt/vault/tls
+```
+```bash
 openssl req -out tls.crt -new -keyout tls.key -newkey rsa:4096 -nodes -sha256 -x509 -subj "/O=HashiCorp/CN=Vault" -addext "subjectAltName = IP:0.0.0.0,DNS:vault-server.local" -days 3650
+```
+## Verificando a criação dos certificados.
 
-In /opt/vault/tls
-    ls -l   #listas os certificados
-    openssl x509 -in tls.crt -noout -t
+Verificando se os cerificados foram criados.
+```bash
+ls -l   #listas os certificados
+```
 
-IN /etc/hosts 
-    adicionar a linha "127.0.0.1 vault-server.local"
+Se não tiver nenhum nome para maquina configurado no DNS, vá em `/etc/hosts ` e adiciona a seguinte linha no final do arquivo.
+```bash
+127.0.0.1 vault-server.local
+```
+**Nota:** O nome da máquina pode ser qualquer um, desde de que seja o nome que foi inserido na criação do certificado.
 
+```bash
 ping -c 4 vault-server.local
+```
 
-
+## Instalando o Vault
+Seguir o tutorial de instalação, tutorial pode ser encontrado neste mesmo repositorio, ou na pagina oficial da Hashicorp(adicionar o link).
+## Criando o arquivo de configuração
 
 nano  /etc/vault/config.hcl
 ```bash

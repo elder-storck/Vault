@@ -30,8 +30,9 @@ ping -c 4 vault-server.local
 ## Instalando o Vault
 Seguir o tutorial de instalação, tutorial pode ser encontrado neste mesmo repositorio, ou na pagina oficial da Hashicorp(adicionar o link).
 ## Criando o arquivo de configuração
-
+```bash
 nano  /etc/vault/config.hcl
+```
 ```bash
 storage "file" {
   path    = "./vault/data"
@@ -45,7 +46,36 @@ listener "tcp" {
 
 ui = true
 ```
-
+```bash
 chown vault: /opt/vault/tls/*
-
+```
+```bash
 service vault start
+```
+```bash
+vault status
+```
+
+```bash
+apt install net-tools
+```
+
+```bash
+netstat -plant | grep vault
+```
+
+```bash
+export VAULT_ADDR='http://<hostname>:8200'
+```
+
+```bash
+export VAULT_CACERT="/opt/vault/tls/tls.crt"
+
+```
+
+```bash
+vault status
+```
+```bash
+vault init
+```

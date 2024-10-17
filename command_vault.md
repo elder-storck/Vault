@@ -17,6 +17,10 @@ Verificando se os cerificados foram criados.
 ls -l   #listas os certificados
 ```
 
+```bash
+openssl x509 -in tls.crt -noout -text
+```
+
 Se não tiver nenhum nome para maquina configurado no DNS, vá em `/etc/hosts ` e adiciona a seguinte linha no final do arquivo.
 ```bash
 127.0.0.1 vault-server.local
@@ -53,7 +57,7 @@ chown vault: /opt/vault/tls/*
 service vault start
 ```
 ```bash
-vault status
+service vault status
 ```
 
 ```bash
@@ -65,7 +69,7 @@ netstat -plant | grep vault
 ```
 
 ```bash
-export VAULT_ADDR='http://<hostname>:8200'
+export VAULT_ADDR='https://<hostname>:8200'
 ```
 
 ```bash
@@ -77,5 +81,5 @@ export VAULT_CACERT="/opt/vault/tls/tls.crt"
 vault status
 ```
 ```bash
-vault init
+vault operator init
 ```
